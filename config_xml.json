@@ -1,0 +1,216 @@
+{
+  "gestion": {
+    "test": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "33474",
+      "Campaign": "144758",
+      "Group": "826253+",
+      "Action": "Test_Newsletter#"
+    },
+    "general": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "33474",
+      "Campaign": "144755",
+      "Group": "825678+",
+      "Action": "NL_General#"
+    },
+    "empleo_y_management": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32137",
+      "Campaign": "144756",
+      "Group": "826730+",
+      "Action": "NL_Empleo_y_Management#"
+    },
+    "empresas": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32138",
+      "Campaign": "144756",
+      "Group": "873197+",
+      "Action": "NL_Empresas#"
+    },
+    "tecnologia": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32139",
+      "Campaign": "144756",
+      "Group": "825683+",
+      "Action": "NL_Tecnologia#"
+    },
+    "tu_dinero": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32140",
+      "Campaign": "144756",
+      "Group": "826711+",
+      "Action": "NL_Tu_dinero#"
+    },
+    "politica": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32141",
+      "Campaign": "144756",
+      "Group": "882875+",
+      "Action": "NL_Politica#"
+    },
+    "fotoglerias": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32142",
+      "Campaign": "144756",
+      "Group": "882876+",
+      "Action": "NL_Fotogalerias#"
+    },
+    "activos_gestion": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "33474",
+      "Campaign": "144755",
+      "Group": "831770+",
+      "Action": "NL_Activos_Gestion#"
+    },
+    "nl_general": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "33474",
+      "Campaign": "144755",
+      "Group": "931273+",
+      "Action": "NL_General_2G#"
+    },
+    "especial": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "33474",
+      "Campaign": "144756",
+      "Group": "825678+",
+      "Action": "NL_Especial#"
+    }
+  },
+  "elcomercio": {
+    "test": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "30543",
+      "Campaign": "148146",
+      "Group": "929831+",
+      "Action": "Test_NL_General#"
+    },
+    "activos_comercio": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "30543",
+      "Campaign": "147805",
+      "Group": "831777+",
+      "Action": "NL_General#"
+    },
+    "general": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "30543",
+      "Campaign": "147805",
+      "Group": "842220+",
+      "Action": "NL_General#"
+    },
+    "series": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32631",
+      "Campaign": "166166",
+      "Group": "888388+",
+      "Action": "NL_Series#"
+    },
+    "series_2": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32631",
+      "Campaign": "166166",
+      "Group": "1000703+",
+      "Action": "NL_Series#"
+    },
+    "esports": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32640",
+      "Campaign": "166166",
+      "Group": "888390+",
+      "Action": "NL_Esports#"
+    },
+    "deporte": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32641",
+      "Campaign": "166166",
+      "Group": "842220+",
+      "Action": "NL_Deporte#"
+    },
+    "politica": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "32629",
+      "Campaign": "166166",
+      "Group": "888386+",
+      "Action": "NL_Politica#"
+    },
+    "deporte_especial": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "33681",
+      "Campaign": "166166",
+      "Group": "933010+",
+      "Action": "NL_Deportes_Especial#"
+    },
+    "politica_especial": {
+      "Email": "soporte.prensapopular@ec.pe",
+      "Confirm": "true",
+      "Return": "true",
+      "Detail": "true",
+      "SenderId": "34908",
+      "Campaign": "166166",
+      "Group": "1001315+",
+      "Action": "NL_Politica_Especial#"
+    }
+  }
+}

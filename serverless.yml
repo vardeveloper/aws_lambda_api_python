@@ -1,0 +1,430 @@
+# serverless.yml
+service: emblue-api-service
+
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+    zip: true
+
+exclude:
+  - node_modules**
+  - .idea
+  - .serverless
+  - .gitignore
+  - .package.json
+  - .README.md
+  - requirements.txt
+
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+provider:
+  name: aws
+  runtime: python3.6
+  versionFunctions: false
+  stage: ${opt:stage,'dev'}
+  region: ${file(${opt:stage,self:provider.stage}.config.yml):AWS_REGION}
+  environment:
+    env: ${opt:stage,'dev'}
+    region: ${file(${opt:stage,self:provider.stage}.config.yml):AWS_REGION}
+    SENTRY_DNS: ${file(${opt:stage,self:provider.stage}.config.yml):SENTRY_DNS}
+    MAIL_RELAY: ${file(${opt:stage,self:provider.stage}.config.yml):MAIL_RELAY}
+
+    DB_USER: ${file(${opt:stage,self:provider.stage}.config.yml):USER}
+    DB_PASS: ${file(${opt:stage,self:provider.stage}.config.yml):PASSWORD}
+    DB_HOST: ${file(${opt:stage,self:provider.stage}.config.yml):HOST}
+    DB_PORT: ${file(${opt:stage,self:provider.stage}.config.yml):PORT}
+    DB_NAME: ${file(${opt:stage,self:provider.stage}.config.yml):DATABASE}
+
+    ENDPOINT_EMBLUE: ${file(${opt:stage,self:provider.stage}.config.yml):ENDPOINT_EMBLUE}
+    ENDPOINT_EMBLUE_BULK: ${file(${opt:stage,self:provider.stage}.config.yml):ENDPOINT_EMBLUE_BULK}
+    EMBLUE_FTP_HOST: ${file(${opt:stage,self:provider.stage}.config.yml):EMBLUE_FTP_HOST}
+    BUCKET: ${file(${opt:stage,self:provider.stage}.config.yml):BUCKET}
+    GESTION_NEWSLETTER_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_NEWSLETTER_CODE}
+    GESTION_NEWSLETTER_API_KEY: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_NEWSLETTER_API_KEY}
+    GESTION_NEWSLETTER_ID: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_NEWSLETTER_ID}
+    GESTION_NEWSLETTER_FTP_PASS: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_NEWSLETTER_FTP_PASS}
+    GESTION_CAMPAIGN_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_CAMPAIGN_CODE}
+    GESTION_CAMPAIGN_API_KEY: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_CAMPAIGN_API_KEY}
+    GESTION_CAMPAIGN_ID: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_CAMPAIGN_ID}
+    GESTION_CAMPAIGN_FTP_PASS: ${file(${opt:stage,self:provider.stage}.config.yml):GESTION_CAMPAIGN_FTP_PASS}
+    COMERCIO_NEWSLETTER_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):COMERCIO_NEWSLETTER_CODE}
+    COMERCIO_NEWSLETTER_API_KEY: ${file(${opt:stage,self:provider.stage}.config.yml):COMERCIO_NEWSLETTER_API_KEY}
+    ELCOMERCIO_NEWSLETTER_ID: ${file(${opt:stage,self:provider.stage}.config.yml):ELCOMERCIO_NEWSLETTER_ID}
+    ELCOMERCIO_NEWSLETTER_FTP_PASS: ${file(${opt:stage,self:provider.stage}.config.yml):ELCOMERCIO_NEWSLETTER_FTP_PASS}
+    ELCOMERCIO_CAMPAIGN_ID: ${file(${opt:stage,self:provider.stage}.config.yml):ELCOMERCIO_CAMPAIGN_ID}
+    ELCOMERCIO_CAMPAIGN_FTP_PASS: ${file(${opt:stage,self:provider.stage}.config.yml):ELCOMERCIO_CAMPAIGN_FTP_PASS}
+    ELCOMERCIO_CAMPAIGN_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):ELCOMERCIO_CAMPAIGN_CODE}
+    ELCOMERCIO_CAMPAIGN_API_KEY: ${file(${opt:stage,self:provider.stage}.config.yml):ELCOMERCIO_CAMPAIGN_API_KEY}
+
+    SENDY_API: ${file(${opt:stage,self:provider.stage}.config.yml):SENDY_API}
+    PERU21_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):PERU21_CODE}
+    PERU21_LIST: ${file(${opt:stage,self:provider.stage}.config.yml):PERU21_LIST}
+    TROME_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):TROME_CODE}
+    TROME_LIST: ${file(${opt:stage,self:provider.stage}.config.yml):TROME_LIST}
+    DEPOR_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):DEPOR_CODE}
+    DEPOR_LIST: ${file(${opt:stage,self:provider.stage}.config.yml):DEPOR_LIST}
+    CORREO_CODE: ${file(${opt:stage,self:provider.stage}.config.yml):CORREO_CODE}
+    CORREO_LIST: ${file(${opt:stage,self:provider.stage}.config.yml):CORREO_LIST}
+
+  apiGateway:
+    restApiId: ${file(${opt:stage, self:provider.stage}.config.yml):REST_API_ID}
+    restApiRootResourceId: ${file(${opt:stage, self:provider.stage}.config.yml):REST_API_ROOT_RESOURCE_ID}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource:
+        - "arn:aws:s3:::${file(${opt:stage,self:provider.stage}.config.yml):BUCKET}"
+        - "arn:aws:s3:::${file(${opt:stage,self:provider.stage}.config.yml):BUCKET}/*"
+
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - lambda:InvokeAsync
+      Resource: "*"
+
+functions:
+  emblue:
+    runtime: python3.6
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          path: /emblue/public/v1/info
+          method: get
+          cors: true
+      - http:
+          path: /emblue/public/v1/subscription
+          method: post
+          cors: true
+      - http:
+          path: /emblue/public/v1/unsubscription
+          method: Any
+          cors: true
+      - http:
+          path: /emblue/public/v1/subscription_by_topic
+          method: Any
+          cors: true
+      - http:
+          path: /emblue/public/v1/unsubscription_by_topic
+          method: Any
+          cors: true
+      - http:
+          path: /emblue/public/v1/unsubscription_total
+          method: Any
+          cors: true
+      - http:
+          path: /emblue/public/v1/webhook
+          method: Any
+          cors: true
+      - http:
+          path: /emblue/public/v1/bucket/file_list
+          method: Any
+          cors: true
+      - http:
+          path: /emblue/public/v1/bucket/file_get
+          method: Any
+          cors: true
+      - http:
+          path: /emblue/public/v1/test/method
+          method: Any
+          cors: true
+    description: Servicio Emblue
+    vpc:
+      securityGroupIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SG}
+      subnetIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET1}
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET2}
+    reservedConcurrency: 10
+    memorySize: 128
+    timeout: 300
+    tags:
+      Env: ${opt:stage,'dev'}
+      Stack: emblue
+
+  jobOnboarding:
+    runtime: python3.6
+    handler: jobs.job_onboarding.handler
+    events:
+      - schedule:
+          name: job_campaign_onboarding
+          description: ''
+          rate: cron(0 16 * * ? *) # (11:00am)
+          enabled: false
+          input:
+            brand: gestion
+            process: onboarding
+
+    description: Onboarding Emblue
+    vpc:
+      securityGroupIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SG}
+      subnetIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET1}
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET2}
+    reservedConcurrency: 10
+    memorySize: 128
+    timeout: 300
+    tags:
+      env: ${opt:stage,'dev'}
+      stack: onboarning
+
+  jobRemarketing:
+    runtime: python3.6
+    handler: jobs.job_remarketing.handler
+    events:
+      - schedule:
+          name: job_rmkt_gestion
+          description: ''
+          rate: cron(0 18 * * ? *) # (13:00pm)
+          enabled: false
+          input:
+            brand: gestion
+            process: remarketing
+      - schedule:
+          name: job_rmkt_elcomercio
+          description: ''
+          rate: cron(0 18 * * ? *) # (13:00pm)
+          enabled: false
+          input:
+            brand: elcomercio
+            process: remarketing
+
+    description: Remarketing Emblue
+    vpc:
+      securityGroupIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SG}
+      subnetIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET1}
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET2}
+    reservedConcurrency: 10
+    memorySize: 500
+    timeout: 600 # 10 minutes
+    tags:
+      env: ${opt:stage,'dev'}
+      stack: remarketing
+
+  jobSubscription:
+    runtime: python3.6
+    handler: jobs.job_subscription.handler
+    events:
+      - schedule:
+          name: job_subscription_gestion
+          description: ''
+          rate: cron(05 05 * * ? *)
+          enabled: true
+          input:
+            brand: gestion
+            days: 1
+      - schedule:
+          name: job_subscription_elcomercio
+          description: ''
+          rate: cron(05 05 * * ? *)
+          enabled: true
+          input:
+            brand: elcomercio
+            days: 1
+
+    description: Subscription Newsletter Emblue
+    vpc:
+      securityGroupIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SG}
+      subnetIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET1}
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET2}
+    reservedConcurrency: 10
+    memorySize: 500
+    timeout: 600 # 10 minutes
+    tags:
+      env: ${opt:stage,'dev'}
+      stack: subscription
+
+  jobUserByNewsletter:
+    runtime: python3.6
+    handler: jobs.users_by_newsletter.handler
+    events:
+      - schedule:
+          name: gestion_users_by_newsletter_generalv2
+          description: ''
+          rate: cron(40 02 * * ? *) # (9:00am)
+          enabled: false
+          input:
+            brand: gestion
+            group: general
+      - schedule:
+          name: gestion_users_by_newsletter_empleo_y_managementv2
+          description: ''
+          rate: cron(40 02 * * ? *)
+          enabled: false
+          input:
+            brand: gestion
+            group: empleo_y_management
+      - schedule:
+          name: gestion_users_by_newsletter_empresasv2
+          description: ''
+          rate: cron(40 02 * * ? *)
+          enabled: false
+          input:
+            brand: gestion
+            group: empresas
+      - schedule:
+          name: gestion_users_by_newsletter_tecnologiav2
+          description: ''
+          rate: cron(40 02 * * ? *)
+          enabled: false
+          input:
+            brand: gestion
+            group: tecnologia
+      - schedule:
+          name: gestion_users_by_newsletter_tu_dinerov2
+          description: ''
+          rate: cron(40 02 * * ? *)
+          enabled: false
+          input:
+            brand: gestion
+            group: tu_dinero
+      - schedule:
+          name: elcomercio_users_by_newsletter_generalv2
+          description: ''
+          rate: cron(0 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: general
+      - schedule:
+          name: elcomercio_users_by_newsletter_coronavirusv2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: coronavirus
+      - schedule:
+          name: elcomercio_users_by_newsletter_buenas_noticiasv2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: buenas_noticias
+      - schedule:
+          name: elcomercio_users_by_newsletter_saca_la_cuentav2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: saca_la_cuenta
+      - schedule:
+          name: elcomercio_users_by_newsletter_club_corrupcionv2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: club_corrupcion
+      - schedule:
+          name: elcomercio_users_by_newsletter_cuentame_otrav2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: cuentame_otra
+      - schedule:
+          name: elcomercio_users_by_newsletter_pasos_perdidosv2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: pasos_perdidos
+      - schedule:
+          name: elcomercio_users_by_newsletter_seriesv2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: series
+      - schedule:
+          name: elcomercio_users_by_newsletter_donde_comemosv2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: donde_comemos
+      - schedule:
+          name: elcomercio_users_by_newsletter_tinta_invisiblev2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: tinta_invisible
+      - schedule:
+          name: elcomercio_users_by_newsletter_vida_futurov2
+          description: ''
+          rate: cron(15 15 * * ? *)
+          enabled: false
+          input:
+            brand: elcomercio
+            group: vida_futuro
+
+    description: Users by Newsletter
+    vpc:
+      securityGroupIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SG}
+      subnetIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET1}
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET2}
+    reservedConcurrency: 10
+    memorySize: 500
+    timeout: 600 # 10 minutes
+    tags:
+      env: ${opt:stage,'dev'}
+      stack: subscription
+
+  jobNewsletter:
+    runtime: python3.6
+    handler: jobs.job_newsletter.handler
+    events:
+      - schedule:
+          name: job_newsletter_gestion_general_turno_manana
+          description: ''
+          rate: cron(0 14 * * ? *) # (09:00am)
+          enabled: false
+          input:
+            brand: gestion
+            newsletter: general
+            group: test
+      - schedule:
+          name: job_newsletter_gestion_general_turno_tarde
+          description: ''
+          rate: cron(0 19 * * ? *) # (14:00pm)
+          enabled: false
+          input:
+            brand: gestion
+            newsletter: general
+            group: test
+
+    description: Generate files Newsletter Emblue
+    vpc:
+      securityGroupIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SG}
+      subnetIds:
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET1}
+        - ${file(${opt:stage,self:provider.stage}.config.yml):SNET2}
+    reservedConcurrency: 10
+    memorySize: 500
+    timeout: 600 # 10 minutes
+    tags:
+      env: ${opt:stage,'dev'}
+      stack: newsletter

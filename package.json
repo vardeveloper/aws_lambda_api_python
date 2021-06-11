@@ -1,0 +1,22 @@
+{
+  "name": "ci_assets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-python-requirements": "^5.0.0",
+    "serverless-wsgi": "^1.7.2"
+  },
+  "dependencies": {
+    "jsend": "^1.0.2",
+    "lambda-api": "^0.9.2",
+    "npm": "^6.10.0",
+    "serverless": "^1.46.1"
+  }
+}

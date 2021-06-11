@@ -1,0 +1,138 @@
+{
+  "accounts": [
+    {
+      "gestion_newsletter": {
+        "id": "12154",
+        "name": "Newsletter Gestión",
+        "groups": [
+          {
+            "id": "825678",
+            "name": "Ges_NL_General",
+            "code": "general"
+          },
+          {
+            "id": "826730",
+            "name": "Ges_NL_Empleos_Management",
+            "code": "empleo_y_management"
+          },
+          {
+            "id": "873197",
+            "name": "Ges_NL_Empresas",
+            "code": "empresas"
+          },
+          {
+            "id": "825683",
+            "name": "Ges_NL_Tecnologia",
+            "code": "tecnologia"
+          },
+          {
+            "id": "826711",
+            "name": "Ges_NL_Tu_Dinero",
+            "code": "tu_dinero"
+          },
+          {
+            "id": "882875",
+            "name": "Ges_NL_Politica",
+            "code": "politica"
+          },
+          {
+            "id": "882876",
+            "name": "Ges_NL_Fotogalerias",
+            "code": "fotogalerias"
+          }
+        ]
+      },
+      "comercio_newsletter": {
+        "id": "15274",
+        "name": "Newsletter Comercio",
+        "groups": [
+          {
+            "id": "831777",
+            "name": "El Comercio al día",
+            "code": "general"
+          },
+          {
+            "id": "1056231",
+            "name": "Buenas Noticias",
+            "code": "buenas_noticias"
+          },
+          {
+            "id": "1047045",
+            "name": "Coronavirus",
+            "code": "coronavirus"
+          },
+          {
+            "id": "1056225",
+            "name": "Saca la Cuenta",
+            "code": "saca_la_cuenta"
+          },
+          {
+            "id": "1056217",
+            "name": "El club de la corrupción",
+            "code": "club_corrupcion"
+          },
+          {
+            "id": "1056215",
+            "name": "Cuéntame otra",
+            "code": "cuentame_otra"
+          },
+          {
+            "id": "1056214",
+            "name": "Pasos perdidos",
+            "code": "pasos_perdidos"
+          },
+          {
+            "id": "1056230",
+            "name": "En el próximo episodio…",
+            "code": "series"
+          },
+          {
+            "id": "1126243",
+            "name": "Donde Comemos",
+            "code": "donde_comemos"
+          },
+          {
+            "id": "1126242",
+            "name": "Tinta Invisible",
+            "code": "tinta_invisible"
+          },
+          {
+            "id": "1056228",
+            "name": "Vida & Futuro",
+            "code": "vida_futuro"
+          },
+          {
+            "id": "1056209",
+            "name": "Las más leídas",
+            "code": "las_mas_leidas"
+          },
+          {
+            "id": "1056224",
+            "name": "#NoTePases",
+            "code": "notepases"
+          },
+          {
+            "id": "1056210",
+            "name": "Deporte Total",
+            "code": "deporte_total"
+          },
+          {
+            "id": "1056210",
+            "name": "Matematicamente",
+            "code": "matematicamente"
+          },
+          {
+            "id": "1056220",
+            "name": "Esquina Blanquiazul",
+            "code": "esquina_blanquiazul"
+          },
+          {
+            "id": "1056218",
+            "name": "Trinchera Crema",
+            "code": "trinchera_crema"
+          }
+        ]
+      }
+    }
+  ]
+}

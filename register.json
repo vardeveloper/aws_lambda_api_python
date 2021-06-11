@@ -1,0 +1,41 @@
+{
+  "eventName": "onboarding",
+  "items": [
+    {
+      "email": "victor.alcantara@fractalservicios.pe",
+      "attributes": {
+        "nombre": "Victor",
+        "apellido": "Alcantara",
+        "navegacion_activa": "no",
+        "suscriptor_activo": "si"
+      }
+    },
+    {
+      "email": "darwin.valencia@comercio.com.pe",
+      "attributes": {
+        "nombre": "darwin",
+        "apellido": "valencia",
+        "navegacion_activa": "si",
+        "suscriptor_activo": "si"
+      }
+    },
+    {
+      "email": "jean.gutierrez@fractalservicios.pe",
+      "attributes": {
+        "nombre": "jean",
+        "apellido": "gutierrez",
+        "navegacion_activa": "no",
+        "suscriptor_activo": "si"
+      }
+    },
+    {
+      "email": "christian.rodas@fractalservicios.pe",
+      "attributes": {
+        "nombre": "christian",
+        "apellido": "rodas",
+        "navegacion_activa": "si",
+        "suscriptor_activo": "si"
+      }
+    }
+  ]
+}
